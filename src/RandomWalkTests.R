@@ -5,13 +5,13 @@ rm(list = ls(all=TRUE))
 gc()
 
 path = 'C:/Excercise/R/RandomWalk/'
-FileName = 'SPIValues.csv'
+FileName = '2SPI.csv' #'SPIValues.csv'
 
 #' @DifferentPaths: Input, Codes and Output paths.
 #' 
-InputPath <- paste0(path,"Inputs/")
-CodePath <- paste0(path,"src/")
-OutputPath <- paste0(path,"Outputs/")
+InputPath   <- paste0(path,"Inputs/")
+CodePath    <- paste0(path,"src/")
+OutputPath  <- paste0(path,"Outputs/")
 
 #' @SetDirectory: Calling other R Functions
 #' 
@@ -27,10 +27,10 @@ DistinctRegion <- unique(series$Region)
 DistinctMonth <- unique(series$Month)
 AllPvalue <- NULL
 
-pb <- txtProgressBar(min = 0, max = 8, style = 3)
+pb <- txtProgressBar(min = 0, max = (length(DistinctRegion) * length(DistinctMonth)), style = 3)
 k <- 1
-for(R in 1:2){#length(DistinctRegion)
-  for(M in 1:4){
+for(R in 1:length(DistinctRegion)){#
+  for(M in 1:length(DistinctMonth)){
     # R =  1
     # M = 2
     Series <- subset(series,Region == DistinctRegion[R] & Month == M)$Values
@@ -61,7 +61,7 @@ for(R in 1:2){#length(DistinctRegion)
     #' @WildBootStrap
     #' 
     # library(vrtest)
-    KimBoot_PValue <- AutoBoot.test(Series, nboot=100, wild='Normal')$pval
+    KimBoot_PValue <- AutoBoot.test(Series, nboot=1000, wild='Normal')$pval
     
     Region <- DistinctRegion[R];Month <- M
     temp <- data.frame(Region,Month,MK_Pvalue,KPSS_PValue,LungBox_PValue,ADF_PValue,KimBoot_PValue,OptLag)
