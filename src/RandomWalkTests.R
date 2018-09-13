@@ -35,7 +35,7 @@ for(R in 1:length(DistinctRegion)){#
     # M = 2
     Series <- subset(series,Region == DistinctRegion[R] & Month == M)$Values
     
-    #' @Menkendal
+    #' @Mannkendal
     #'  
     # library(trend)
     MK_Pvalue <- mk.test(Series, alternative = c("two.sided"),continuity = TRUE)$p.value
