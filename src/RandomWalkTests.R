@@ -45,13 +45,13 @@ for(R in 1:length(DistinctRegion)){#
     # library(tseries)
     KPSS_PValue <- kpss.test(Series, null = c("Trend"), lshort = TRUE)$p.value
     
-    #' @CADF
-    # library(CADFtest)
-    OptLag <- CADFtest(Series, max.lag.y = 10, criterion = "AIC")$max.lag.y
-
     #' @Lung-Box
     #'  
-    LungBox_PValue <- Box.test (Series, lag = ifelse(OptLag==0,1,OptLag), type = "Ljung")$p.value
+    LungBox_PValue <- Box.test (Series, lag = min(10,length(Series)/5), type = "Ljung")$p.value
+    
+    #' @CADF
+    # library(CADFtest)
+    OptLag <- CADFtest(Series, max.lag.y = min(10,length(Series)/5), criterion = "AIC")$max.lag.y
     
     #' @Augmented_Dicky_Fuller
     #' 

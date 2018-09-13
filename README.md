@@ -2,7 +2,7 @@ Checking Random Walk in a Time Series
 ===================================================
 
 ## Description
-Multiple tests have beend used to check a time-series is a random walk or not. The following tests are considered for now:
+Multiple tests have been used to check a time-series is a random walk or not. The following tests are considered for now:
 ```xml
 1. Ljung-Box Q-statistic
 2. Kwiatkowski-Phillips-Schmidt-Shin
