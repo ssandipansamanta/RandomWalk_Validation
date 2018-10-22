@@ -4,6 +4,6 @@ InstalledPackages <- function(packageNeedtoInstall){
         eval(parse(text=paste0("library(",packageNeedtoInstall,")")))
         Sys.sleep(1)
 }
-Packages = c("trend","tseries","CADFtest","fUnitRoots","vrtest")
+Packages = c("trend","tseries","CADFtest","fUnitRoots","vrtest","wavelets","wavethresh","data.table")
 lapply(Packages, InstalledPackages)
 cat("\014")

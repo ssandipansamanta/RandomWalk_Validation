@@ -4,7 +4,7 @@
 rm(list = ls(all=TRUE))
 gc()
 
-path = 'C:/Excercise/RandomWalk/RandomWalk_Validation/src'
+path = 'C:/Excercise/R/RandomWalk/'
 FileName = '2SPI.csv' #'SPIValues.csv'
 
 #' @DifferentPaths: Input, Codes and Output paths.
@@ -61,10 +61,31 @@ for(R in 1:length(DistinctRegion)){#
     #' @WildBootStrap
     #' 
     # library(vrtest)
-    KimBoot_PValue <- AutoBoot.test(Series, nboot=1000, wild='Normal')$pval
+    KimBoot_PValue <- 0#AutoBoot.test(Series, nboot=1000, wild='Normal')$pval
+    
+    #' @WaveletBased
+    #' 
+    #' library(wavelets) & library(wavethresh)
+    
+    N <- 128
+    NoLevel <- log(N,base = 2)-1
+    dwt<- dwt(Series[(length(Series)-N):length(Series)], "haar", n.levels=NoLevel)
+    
+    wMatrix <- matrix(unlist(dwt@W), ncol = NoLevel, byrow = FALSE) 
+    vVector <- dwt@V[[NoLevel]]
+    
+    # G statistic value computation
+    
+    varWMatrix <- apply(wMatrix, 2, var)
+    varvVector <- var(vVector)
+    
+    G <- sum(varWMatrix)/varvVector
+    
+    FStats <- (N - N/2^NoLevel)/(G*(N/2^NoLevel-1))
+    FPvalue <- 1 - pf(FStats, df1=(N/2^NoLevel-1), df2=(N - N/2^NoLevel), lower.tail = TRUE, log.p = FALSE)
     
     Region <- DistinctRegion[R];Month <- M
-    temp <- data.frame(Region,Month,MK_Pvalue,KPSS_PValue,LungBox_PValue,ADF_PValue,KimBoot_PValue,OptLag)
+    temp <- data.frame(Region,Month,MK_Pvalue,KPSS_PValue,LungBox_PValue,ADF_PValue,KimBoot_PValue,OptLag,G,FStats,FPvalue)
     AllPvalue <- rbind(AllPvalue,temp)
     
     #' @AddingStatusBar
@@ -79,3 +100,4 @@ write.csv(file=paste0(OutputPath,"Output.csv"),AllPvalue,row.names = FALSE)
 
 rm(list = ls(all=TRUE))
 gc()
+
