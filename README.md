@@ -53,5 +53,4 @@ All the required packages will install automatically in the presence of internet
 ```
 
 ## Reference
-Almasari et. al.(2008) ___Testing for climate warming in Sweden during 1850–1999, using wavelets analysis.___ Journal of Applied Statistics,35(4),431-443.
-  
+[Almasari et. al.(2008) ___Testing for climate warming in Sweden during 1850–1999, using wavelets analysis.___ Journal of Applied Statistics,**35(4)**,431-443.](https://www.tandfonline.com/doi/abs/10.1080/02664760701835011)
