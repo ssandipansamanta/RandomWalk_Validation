@@ -9,6 +9,7 @@ Multiple tests have been used to check a time-series is a random walk or not. Th
 3. Augmented Dicky Fuller
 4. Kim's Bootstrapped Variance Ratio Test
 5. Mann Kendall Trend Test
+6. Wavelet
 ```
 
 ## Approach
