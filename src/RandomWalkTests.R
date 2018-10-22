@@ -4,7 +4,7 @@
 rm(list = ls(all=TRUE))
 gc()
 
-path = 'C:/Excercise/R/RandomWalk/'
+path = 'C:/Excercise/RandomWalk/RandomWalk_Validation/src'
 FileName = '2SPI.csv' #'SPIValues.csv'
 
 #' @DifferentPaths: Input, Codes and Output paths.
